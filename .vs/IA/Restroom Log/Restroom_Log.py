@@ -1,9 +1,23 @@
 
 from tkinter import *
 
+#pi screen is 800x480 pixels
 class SelectStudent:
     
-    def Students(self):
+    def __init__(self, root):
+        self.root = root
+        #self.frame = Frame(self.root)
+        self.root.attributes('-fullscreen', True)
+        #self.root.geometry("200x200")
+        #Label(self.root, bg = "blue", text = "at least it isn't completely broken").pack
+        #self.button_rename = Button(self.root, text = "New window").pack()
+        self.makeButtons()
+        self.root.bind('<Escape>',lambda e: root.destroy())
+
+    def makeButtons(self):
+        r=0
+        c=0
+
         students =[
         "john cena",
         "mrpoopybutthole",
@@ -27,49 +41,41 @@ class SelectStudent:
 
         for i in range(len(students)):
            students[i]= students[i].replace(" ", "\n")
-        return students
-
-    def position(pos):
-        print(students[pos])
-        self.OpenNewWindow()
-
-    def OpenNewWindow(self):
-        self.master.destroy()
-        self.master =Tk()
-        self.app = Thanks(self.master)
-        self.master.mainloop()
-
-    def __init__(self, master):
-        self.master = master
-        self.frame = Frame(self.master)
-
-        r=0
-        c=0
 
         buttons = []
 
-        print(self.Students()[9])
-       # for j in range(len(self.Students())):
-       #     buttons.append(Button(self.frame,text = self.Students()[j], width = 10, height = 4, bg = "Blue", command = lambda j=j: position(j)).grid(row = r, column = c, padx = 10, pady = 10))
-       #     c+=1
-       #     if (c==5):
-       #         c=0
-       #         r+=1
+        for j in range(len(students)):
+            buttons.append(Button(self.root,text = students[j], width = 10, height = 4, bg = "Blue", command = lambda j=j: self.OpenNewWindow(Thanks)).grid(row = r, column = c, padx = 10, pady = 10))
+            c+=1
+            if (c==5):
+                c=0
+                r+=1
+
+    def OpenNewWindow(self, _class):
+        self.new = Toplevel(self.root)
+        _class(self.new)
+        self.root.withdraw()
+
+
+     
 
 class Thanks:
 
-    def __init__(self, master):
-        self.master = master
-        self.frame = Frame(self.master)
-        Label(ByeBye, text = "Thank You!\nHave Fun").pack()
+    def __init__(self, root):
+        self.root = root
+        self.root.attributes('-fullscreen', True)
+        #self.frame = Frame(self.root)
+        Label(self.root,bg = "white", fg= "blue", text = "Thank You!\nHave Fun", font=('Helvetica bold',200)).pack()
+        self.root.bind('<Escape>',lambda e: root.destroy())
 
 
 
 def main():
-    gui = Tk()
-    gui.geometry("800x800")
-    app = SelectStudent(gui)
-    gui.mainloop()
+    root = Tk()
+    app = SelectStudent(root)
+    app.root.title("start")
+    root.mainloop()
 
 if __name__ == '__main__':
     main()
+ 
