@@ -2,10 +2,11 @@
 from tkinter import *
 from time import *
 
-#pi screen is 800x480 pixels
-class SelectStudent:
+StudOut= "test student"
 
-    StudOut= "test student"
+#pi screen is 800x480 pixels
+#https://stackoverflow.com/questions/65527158/how-to-get-variable-from-a-class-to-another-tkinter-window
+class SelectStudent:
 
     students =[
         "john cena",
@@ -37,6 +38,8 @@ class SelectStudent:
         #self.button_rename = Button(self.root, text = "New window").pack()
         self.makeButtons()
         self.root.bind('<Escape>',lambda e: root.destroy())
+        studentout= ""
+        self.StudOut= studentout
 
     def makeButtons(self):
         r=0
@@ -56,41 +59,41 @@ class SelectStudent:
                 r+=1
 
     def StudentLeaving(self, student):
-        self.StudOut= student
-        print("student leaving" +self.StudOut)
-        t= Thanks(self.root)
-        t.setStudent(self,student)
-        self.OpenNewWindow(t)
-
-
-    def OpenNewWindow(self, _class):
-        self.new = Toplevel(self.root)
-        _class(self.new)
-        self.root.withdraw()
-
-
-class Thanks:
-
-    StudOut=""
-
-    def __init__(self,root):
-        self.root = root
-        self.root.attributes('-fullscreen', True)
-        #self.frame = Frame(self.root)
-        Label(self.root,bg = "white", fg= "blue", text = "Thank You!\nHave Fun", font=('Helvetica bold',200)).pack()
-        self.root.bind('<Escape>',lambda e: root.destroy())
-        sleep(5)
-        #self.setStudent(SelectStudent.StudOut)
-        print("Thanks test"+self.StudOut)
+        studentout = student
+        print("student leaving" + self.StudOut)
+        #t= Thanks(self.root)
+        #t.setStudent(student)
         self.OpenNewWindow(StudentOut)
 
-    def setStudent(self, student):
-        self.StudOut= student
-
     def OpenNewWindow(self, _class):
+        self.root.withdraw()
         self.new = Toplevel(self.root)
         _class(self.new)
-        self.root.withdraw() 
+        
+
+
+#class Thanks:
+#
+#    StudOut=""
+#
+#    def __init__(self,root):
+#        self.root = root
+#        self.root.attributes('-fullscreen', True)
+#        #self.frame = Frame(self.root)
+#        Label(self.root,bg = "white", fg= "blue", text = "Thank You!\nHave Fun", font=('Helvetica bold',200)).grid(row=1, column= 1)
+#        self.root.bind('<Escape>',lambda e: root.destroy())
+#        sleep(5)
+#        #self.setStudent(SelectStudent.StudOut)
+#        print("Thanks test"+self.StudOut)
+#        self.OpenNewWindow(StudentOut)
+
+#    def setStudent(self, student):
+#        self.StudOut= student
+
+#    def OpenNewWindow(self, _class):
+#        self.new = Toplevel(self.root)
+#        _class(self.new)
+#        self.root.withdraw() 
 
 
 class StudentOut:
@@ -98,10 +101,10 @@ class StudentOut:
     def __init__(self, root):
         self.root = root
         self.root.attributes('-fullscreen', True)
-        #self.frame = Frame(self.root)
+        self.frame = Frame(self.root)
+        s= SelectStudent
         print("new screen test")
-        print(SelectStudent.StudOut)
-        Label(self.root,bg = "white", fg= "blue", text = SelectStudent.StudOut + "is currently out\nThank you for your patience", font=('Helvetica bold',100)).pack()
+        Label(self.root,bg = "white", fg= "blue", text = s.StudOut + " is currently out\nThank you for your patience", font=('Helvetica bold',100)).grid(row= 1, column=1)
         self.root.bind('<Escape>',lambda e: root.destroy())
 
 
