@@ -2,11 +2,11 @@
 from tkinter import *
 from time import *
 
-StudOut= "test student"
 
 #pi screen is 800x480 pixels
 #https://stackoverflow.com/questions/65527158/how-to-get-variable-from-a-class-to-another-tkinter-window
-class SelectStudent:
+class SelectStudent(Tk):
+
 
     students =[
         "john cena",
@@ -29,17 +29,15 @@ class SelectStudent:
         "Ken"
         ]
 
-    def __init__(self, root):
-        self.root = root
+    def __init__(self):
+        super().__init__()
         #self.frame = Frame(self.root)
-        self.root.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
         #self.root.geometry("200x200")
         #Label(self.root, bg = "blue", text = "at least it isn't completely broken").pack
         #self.button_rename = Button(self.root, text = "New window").pack()
         self.makeButtons()
-        self.root.bind('<Escape>',lambda e: root.destroy())
-        studentout= ""
-        self.StudOut= studentout
+        self.bind('<Escape>',lambda e: window.destroy())
 
     def makeButtons(self):
         r=0
@@ -52,68 +50,55 @@ class SelectStudent:
         buttons = []
 
         for j in range(len(self.students)):
-            buttons.append(Button(self.root,text = self.students[j], width = 10, height = 4, bg = "Blue", command = lambda j=j: self.StudentLeaving(self.students[j])).grid(row = r, column = c, padx = 10, pady = 10))
+            buttons.append(Button(self,text = self.students[j], width = 10, height = 4, bg = "Blue", command = lambda j=j: self.OpenNewWindow(self.students[j])).grid(row = r, column = c, padx = 10, pady = 10))
             c+=1
             if (c==5):
                 c=0
                 r+=1
 
-    def StudentLeaving(self, student):
-        studentout = student
-        print("student leaving" + self.StudOut)
-        #t= Thanks(self.root)
-        #t.setStudent(student)
-        self.OpenNewWindow(StudentOut)
 
-    def OpenNewWindow(self, _class):
-        self.root.withdraw()
-        self.new = Toplevel(self.root)
-        _class(self.new)
+    def OpenNewWindow(self, student):
+        self.withdraw()
+        Thanks(self, student)
         
 
+class Thanks(Tk):
 
-#class Thanks:
-#
-#    StudOut=""
-#
-#    def __init__(self,root):
-#        self.root = root
-#        self.root.attributes('-fullscreen', True)
-#        #self.frame = Frame(self.root)
-#        Label(self.root,bg = "white", fg= "blue", text = "Thank You!\nHave Fun", font=('Helvetica bold',200)).grid(row=1, column= 1)
-#        self.root.bind('<Escape>',lambda e: root.destroy())
-#        sleep(5)
-#        #self.setStudent(SelectStudent.StudOut)
-#        print("Thanks test"+self.StudOut)
-#        self.OpenNewWindow(StudentOut)
+    def __init__(self, parent, student_name):
+        super().__init__()
 
-#    def setStudent(self, student):
-#        self.StudOut= student
+        self.parent = parent
+        self.attributes('-fullscreen', True)
+        
+        Label(self,bg = "white", fg= "blue", text = "Thank You!\nHave Fun", font=('Helvetica bold',200)).grid(row=1, column= 1)
+       
+        print("Thanks test"+ student_name)
 
-#    def OpenNewWindow(self, _class):
-#        self.new = Toplevel(self.root)
-#        _class(self.new)
-#        self.root.withdraw() 
+        self.after(5000, self.OpenNewWindow(student_name))
+
+        self.bind('<Escape>',lambda e: window.destroy())
+
+    def OpenNewWindow(self, leaver):
+        self.withdraw()
+        StudentOut(self, leaver)
 
 
-class StudentOut:
+class StudentOut(Tk):
 
-    def __init__(self, root):
-        self.root = root
-        self.root.attributes('-fullscreen', True)
-        self.frame = Frame(self.root)
-        s= SelectStudent
+    def __init__(self, parent, student_name):
+
+        super().__init__()
+
+        self.parent = parent
+        self.attributes('-fullscreen', True)
+
         print("new screen test")
-        Label(self.root,bg = "white", fg= "blue", text = s.StudOut + " is currently out\nThank you for your patience", font=('Helvetica bold',100)).grid(row= 1, column=1)
-        self.root.bind('<Escape>',lambda e: root.destroy())
+
+        Label(self,bg = "white", fg= "blue", text = student_name + " is currently out\nThank you for your patience", font=('Helvetica bold',100)).grid(row= 1, column=1)
+
+        self.bind('<Escape>',lambda e: window.destroy())
 
 
-def main():
-    root = Tk()
-    app = SelectStudent(root)
-    app.root.title("start")
-    root.mainloop()
-
-if __name__ == '__main__':
-    main()
- 
+if __name__ == "__main__":
+    window = SelectStudent()
+    window.mainloop()
