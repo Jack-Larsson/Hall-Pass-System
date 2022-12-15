@@ -12,7 +12,7 @@ class SelectStudent(Tk):
         "john cena",
         "mrpoopybutthole",
         "Xi jinping",
-        "Nathan mardanov",
+        "Nathan Mardanov",
         "L bozo",
         "a bozo",
         "the bozo",
@@ -74,9 +74,9 @@ class Thanks(Tk):
        
         print("Thanks test"+ student_name)
 
-        self.after(5000, self.OpenNewWindow(student_name))
+        self.after(5000, lambda: self.OpenNewWindow(student_name))
 
-        self.bind('<Escape>',lambda e: window.destroy())
+        self.bind('<Escape>',lambda e: parent.destroy())
 
     def OpenNewWindow(self, leaver):
         self.withdraw()
@@ -96,7 +96,7 @@ class StudentOut(Tk):
 
         Label(self,bg = "white", fg= "blue", text = student_name + " is currently out\nThank you for your patience", font=('Helvetica bold',100)).grid(row= 1, column=1)
 
-        self.bind('<Escape>',lambda e: window.destroy())
+        self.bind('<Escape>',lambda e: parent.destroy())
 
 
 if __name__ == "__main__":
