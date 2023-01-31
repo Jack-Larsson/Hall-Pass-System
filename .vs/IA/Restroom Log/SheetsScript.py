@@ -3,7 +3,9 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 
-gc = gspread.service_account(filename='mycredentials.json')
+gc = gspread.oauth(
+    credentials_filename=r'C:\Users\jlars\Documents\VS Code Projects\PublicEnemy1\.vs\IA\Restroom Log\googlecreds.json'
+)
 gsheet = gc.open_by_key("1oMakpyyRqNZyMroZ-P6pcBn3dmfjeccDAPllFPeg9xc")
 wsheet = gsheet.worksheet("Sheet1")
 mydata = wsheet.get_all_records()
@@ -11,5 +13,5 @@ mydata = wsheet.get_all_records()
 t = localtime()
 current_time = strftime("%H:%M:%S", t)
 
-def printstudent(last, first, timein,timeout):
-    wsheet.inset_row(last, first, timein, timeout)
+def printstudent(last, first):
+    wsheet.append_row([last, first, current_time])

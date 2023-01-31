@@ -89,7 +89,10 @@ class SelectStudent(Tk):
 
     def OpenNewWindow(self, student):
         self.withdraw()
-        SS.printstudent(student)
+        name = student.split("\n")
+        print(name[1], name[0])
+        SS.printstudent(name[1], name[0])
+        print(name[0])
         Thanks(self, student)
         
 
