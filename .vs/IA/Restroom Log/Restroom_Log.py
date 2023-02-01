@@ -60,12 +60,15 @@ class SelectStudent(Tk):
         "Fred",
         "Konstantin"
         ]
+    
 
     def __init__(self):
         super().__init__()
         #self.attributes('-fullscreen', True)
         self.geometry("800x480")
-        self.configure(bg='White')
+        self.configure(bg='Black')
+        self.scroll_bar = Scrollbar(self)
+        self.icon = PhotoImage(file = r"C:\Users\jlars\Documents\VS Code Projects\PublicEnemy1\.vs\IA\Restroom Log\GUI button.png")
         self.makeButtons()
         self.bind('<Escape>',lambda e: window.destroy())
 
@@ -80,7 +83,7 @@ class SelectStudent(Tk):
         buttons = []
 
         for j in range(len(self.students)):
-            buttons.append(Button(self,text = self.students[j], width = 13, height = 3, bg = "Navy", fg= "White", font=('Arial bold',9), borderwidth= 0,  command = lambda j=j: self.OpenNewWindow(self.students[j])).grid(row = r, column = c, padx = 8, pady = 8))
+            buttons.append(Button(self,text = self.students[j], image = self.icon, compound = CENTER,bg = 'Black',width = 101, height = 76, fg= "White", font=('Microsoft YaHei UI bold',12),bd = 0,  command = lambda j=j: self.OpenNewWindow(self.students[j])).grid(row = r, column = c, padx = 5, pady = 5))
             c+=1
             if (c==7):
                 c=0
