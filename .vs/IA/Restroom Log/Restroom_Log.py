@@ -64,17 +64,19 @@ class SelectStudent(Tk):
 
     def __init__(self):
         super().__init__()
-        #self.attributes('-fullscreen', True)
 
+        #creating a main frame for button window
         frame=Frame(self)
         frame.grid(row=0,column=0, sticky = 'nw')
         frame.grid_rowconfigure(0, weight=1)
         frame.grid_columnconfigure(0, weight=1)
 
+        #creating a canvas that can be scrolled through
         canvas=Canvas(frame,bg='Black',scrollregion=(0,0,800,628))
         canvas.config(width=800,height=480)
         canvas.grid(row=0, column=0, sticky = 'news')
 
+        #create vertical scroll bar
         vbar=Scrollbar(frame, orient=VERTICAL)
         vbar.grid(row=0, column=1, sticky = 'nes')
         vbar.config(command=canvas.yview,
@@ -85,24 +87,25 @@ class SelectStudent(Tk):
             )
         canvas.config(yscrollcommand=vbar.set)
 
+        #create frame inside of canvas to place buttons in
         self.button_frame = Frame(canvas, bg = 'Black')
         canvas.create_window((0,0), window = self.button_frame, anchor = 'nw')
 
-        
-        self.icon = PhotoImage(file = r"D:\s1649121\Documents\VS Projects\PublicEnemy1\.vs\IA\Restroom Log\GUI button.png")
+        #import image for buttons and call make button method
+        self.icon = PhotoImage(file = r"C:\Users\s1649121\Documents\IA\.vs\IA\Restroom Log\GUI button.png")
         self.makeButtons()
-        #self.bind('<Escape>',lambda e: window.destroy())
 
     def makeButtons(self):
         r=0
         c=0
 
-
+        #split student names into two lines to be written on buttons
         for i in range(len(self.students)):
            self.students[i]= self.students[i].replace(" ", "\n")
 
         buttons = []
 
+        #for every student in the class, create a button to return that student's attributes
         for j in range(len(self.students)):
             buttons.append(Button(self.button_frame ,text = self.students[j], image = self.icon, compound = CENTER,bg = 'Black',activebackground = 'Black', width = 101, height = 76, fg= "White", font=('Microsoft YaHei UI bold',12),bd = 0,  command = lambda j=j: self.OpenNewWindow(self.students[j])).grid(row = r, column = c, padx = 5, pady = 5))
             c+=1
@@ -110,13 +113,12 @@ class SelectStudent(Tk):
                 c=0
                 r+=1 
 
-
+    #move to next window after button is pressed
     def OpenNewWindow(self, student):
         self.withdraw()
+        #seperate student name into first and last and write them into the spreadsheet
         name = student.split("\n")
-        print(name[1], name[0])
         SS.printstudent(name[1], name[0])
-        print(name[0])
         Thanks(self, student)
         
 
@@ -128,6 +130,8 @@ class Thanks(Tk):
         self.parent = parent
         self.geometry("800x480")
         #self.attributes('-fullscreen', True)
+
+        #create centered label once student has completed check in process
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -136,8 +140,8 @@ class Thanks(Tk):
         thank_you.grid(row=0, column=0)
         thank_you.grid_columnconfigure(1, weight=1)
         thank_you.grid_rowconfigure(1, weight=1)
-        #print("Thanks test"+ student_name)
 
+        #after a few seconds, move to next window
         self.after(5000, lambda: self.OpenNewWindow(student_name))
 
         self.bind('<Escape>',lambda e: parent.destroy())
@@ -161,11 +165,11 @@ class StudentOut(Tk):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        #print("new screen test")
-
+        #put student name back together in one word to be displayed
         IsOut = student_name
         IsOut = IsOut.replace("\n", " ")
 
+        #create centerd label to display the student who checked out until they return
         goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
         goodbye.grid(row= 0, column=0)
         goodbye.grid_columnconfigure(1, weight=1)
