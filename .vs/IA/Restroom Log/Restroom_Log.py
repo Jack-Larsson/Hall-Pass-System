@@ -65,12 +65,33 @@ class SelectStudent(Tk):
     def __init__(self):
         super().__init__()
         #self.attributes('-fullscreen', True)
-        self.geometry("800x480")
-        self.configure(bg='Black')
-        self.scroll_bar = Scrollbar(self)
-        self.icon = PhotoImage(file = r"C:\Users\jlars\Documents\VS Code Projects\PublicEnemy1\.vs\IA\Restroom Log\GUI button.png")
+
+        frame=Frame(self)
+        frame.grid(row=0,column=0, sticky = 'nw')
+        frame.grid_rowconfigure(0, weight=1)
+        frame.grid_columnconfigure(0, weight=1)
+
+        canvas=Canvas(frame,bg='Black',scrollregion=(0,0,800,628))
+        canvas.config(width=800,height=480)
+        canvas.grid(row=0, column=0, sticky = 'news')
+
+        vbar=Scrollbar(frame, orient=VERTICAL)
+        vbar.grid(row=0, column=1, sticky = 'nes')
+        vbar.config(command=canvas.yview,
+            width = 30,
+            bg = 'White',
+            bd = 0,
+            troughcolor = 'Black'
+            )
+        canvas.config(yscrollcommand=vbar.set)
+
+        self.button_frame = Frame(canvas, bg = 'Black')
+        canvas.create_window((0,0), window = self.button_frame, anchor = 'nw')
+
+        
+        self.icon = PhotoImage(file = r"D:\s1649121\Documents\VS Projects\PublicEnemy1\.vs\IA\Restroom Log\GUI button.png")
         self.makeButtons()
-        self.bind('<Escape>',lambda e: window.destroy())
+        #self.bind('<Escape>',lambda e: window.destroy())
 
     def makeButtons(self):
         r=0
@@ -83,11 +104,11 @@ class SelectStudent(Tk):
         buttons = []
 
         for j in range(len(self.students)):
-            buttons.append(Button(self,text = self.students[j], image = self.icon, compound = CENTER,bg = 'Black',width = 101, height = 76, fg= "White", font=('Microsoft YaHei UI bold',12),bd = 0,  command = lambda j=j: self.OpenNewWindow(self.students[j])).grid(row = r, column = c, padx = 5, pady = 5))
+            buttons.append(Button(self.button_frame ,text = self.students[j], image = self.icon, compound = CENTER,bg = 'Black',activebackground = 'Black', width = 101, height = 76, fg= "White", font=('Microsoft YaHei UI bold',12),bd = 0,  command = lambda j=j: self.OpenNewWindow(self.students[j])).grid(row = r, column = c, padx = 5, pady = 5))
             c+=1
             if (c==7):
                 c=0
-                r+=1
+                r+=1 
 
 
     def OpenNewWindow(self, student):
@@ -107,9 +128,14 @@ class Thanks(Tk):
         self.parent = parent
         self.geometry("800x480")
         #self.attributes('-fullscreen', True)
-        self.configure(bg='Navy')
-        Label(self, fg= "White",bg='Navy', text = "Thank You!\nHave Fun", font=('Helvetica bold',115)).grid(row=1, column= 1)
-       
+        self.configure(bg='#363636')
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
+        thank_you = Label(self, fg= "White",bg='#363636', text = "Thank You!\nHave Fun", font=('Microsoft YaHei UI bold',100))
+        thank_you.grid(row=0, column=0)
+        thank_you.grid_columnconfigure(1, weight=1)
+        thank_you.grid_rowconfigure(1, weight=1)
         #print("Thanks test"+ student_name)
 
         self.after(5000, lambda: self.OpenNewWindow(student_name))
@@ -131,18 +157,20 @@ class StudentOut(Tk):
         self.geometry("800x480")
         #self.attributes('-fullscreen', True)
 
-        self.configure(bg='Navy')
+        self.configure(bg='#363636')
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
 
         #print("new screen test")
 
         IsOut = student_name
         IsOut = IsOut.replace("\n", " ")
 
-        goodbye= Label(self, fg= "White",bg='Navy', text = IsOut + " \nis currently out\nThank you for\nyour patience", font=('Helvetica bold',60))
-        goodbye.grid(row= 1, column=1)
+        goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
+        goodbye.grid(row= 0, column=0)
+        goodbye.grid_columnconfigure(1, weight=1)
+        goodbye.grid_rowconfigure(1, weight=1)
 
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(1, weight=1)
 
 
         self.bind('<Escape>',lambda e: parent.destroy())

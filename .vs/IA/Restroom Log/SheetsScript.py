@@ -4,7 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 gc = gspread.oauth(
-    credentials_filename=r'C:\Users\jlars\Documents\VS Code Projects\PublicEnemy1\.vs\IA\Restroom Log\googlecreds.json'
+    credentials_filename=r'D:\s1649121\Documents\VS Projects\PublicEnemy1\.vs\IA\Restroom Log\googlecreds.json'
 )
 gsheet = gc.open_by_key("1oMakpyyRqNZyMroZ-P6pcBn3dmfjeccDAPllFPeg9xc")
 wsheet = gsheet.worksheet("Sheet1")
