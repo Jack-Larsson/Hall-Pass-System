@@ -1,7 +1,7 @@
 
 from tkinter import *
 from time import *
-#import SheetsScript as SS
+import SheetsScript as SS
 
 
 #pi screen is 800x480 pixels
@@ -92,7 +92,7 @@ class SelectStudent(Tk):
         canvas.create_window((0,0), window = self.button_frame, anchor = 'nw')
 
         #import image for buttons and call make button method
-        self.icon = PhotoImage(file = r"C:\Users\s1649121\Documents\IA\.vs\IA\Restroom Log\GUI button.png")
+        self.icon = PhotoImage(file = r"C:\Users\jlars\Documents\VS Code Projects\PublicEnemy1\.vs\IA\Restroom Log\GUI button.png")
         self.makeButtons()
 
     def makeButtons(self):
@@ -122,7 +122,7 @@ class SelectStudent(Tk):
         #seperate student name into first and last and write them into the spreadsheet
         name = student.split("\n")
         print(name[1], name[0])
-        #SS.printstudent(name[1], name[0])
+        SS.printstudent(name[1], name[0])
         print(name[0])
         Thanks(self, student)
         

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hall-pass-log",
+  "private_key_id": "6601e360971477827513b43415586afdeb3ca434",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDT3qnwzxXk4xmp\nS+MHhmyuvGk2IAQEIRIg4R/X+GZNG/z7rboipfr+Ka68dqOKnf5rbEyAk22j5d9d\n7tjT8U2TydjqFxC9cEDzWUqmAsl75Bqa+Nstf220326tXJRCvISqE9XdBf3RreWV\nqtTAL14R7kCbyb/0OcsXHAYBKC3NRnrjqOOVq7j3NxBRUynNkYtogLUA3GKPeOmz\njX6XpyBXDxNpRWYOxUaBMitB9hbaOP4o6dvekPZ+OiQfHQSknUzevoWBWXTfbnLQ\n+uFeMiKTOjP42obq/TPwTmrknBXDoGbPZXr5elqUEMtxODBk7geEZAFXuVyaYPzE\nSw0A9gstAgMBAAECggEADcrVUJ+FMwT0WwiypdRtZ3lNIWs3d7auFxqGAn7hggGM\nGCzjYiALVS0Mz/3/1Xqa4Q6yyD1QtOELsnIQXB5oSMeqFEseGYb2OMvw8m+vWB5Y\nUQsEPFOq+6GpSHsvYkzNbMOlIiH4DQSqCR05g61RuA8aK59tnI4ql2gz8ogAEKMj\nKek8JlULbvtxZ+7wkb/I9emXbrRtCuJku/zchIYRxu53on89ekvxPuAsarZMkxIg\nR2/NjqevvNfOQNnCXymRsAs/XwPZKaf2HWzY7wLds5vSypOT/H+J5HG1rvm93K8x\nzmTWNdR47EJxytdXsnGyw7Io8XzNauacVlrF0qwmwQKBgQD+d86P1HHlSxNE0RVV\nQzkyIouZlfc+us2jdmqPbb1sVtXTTE8/CyweDGaglDYDmPutxqQIVKt4mfq4mSNp\n++3vuT4rSKdHedgZSgy966CH8PeIyy4HB6IAU35TqYP414ilSDQTfNalS9dXVUO7\nHui7aH8YpIL5BdR7vDRWq9GkkQKBgQDVJTQSDj2ATeZd6OixhC7xYiBjyRIonMxr\nepXklG0OKvjpVBflhEh6rG8tTFwXF8tS+GZKCloTyqIU+inQhyA93gUJsw1p7mkZ\nlDGKzdkRHVaqjetPii2DvWY2/gEAPAQBRxwBnnDwYgEgQ/hOXP+vMWufA/Q6wUAp\n7UevdyBa3QKBgG04PQeM1qnk1EtoNnDXHph/LU3piSp6gULU053mKzRx/OrpSOY1\nRGVNS0tG8fwPUI7gwIz20nY8GNncmM+nmxOWfbGUSIAsMu1/1AI8PTW73nLvSj0o\nMIdVTtZX3tYSpIrUd82ZeoOODspkRWLuPFQb4NlR2wlJUE8fk5NTwfKRAoGAI+vq\nM6TMvqPiUC9hkBFL7Ahylv6bHdcXKIH3YxeUrY+WdZRjlp3NrUcEUakN2CJ9dNVC\nP/Ywqic7W7exdmBfka2qQbE4cILqmZH9K3x3ucetBH94ieYqt4ojAN+cAZMbxa9b\nS/aM6CZMNEjgPyyzNq5oidsbvQ82phpEO5EjFc0CgYEAmyJA29aH7KaYtHvkZNaQ\nB5U2/paKDox2xK6cbfkVuAz7dDenJkOUER7f3C1kKSDaokZe1PvcuCqcpQB4o56x\nVwVFAUVqGBth9anQ+zu/winsQNu1RrmJ1PAF4XLi7upU5C+9slKHPR1NbwdpFmq+\nLOJQMgMqhqBqlr2Gy0uy/IQ=\n-----END PRIVATE KEY-----\n",
+  "client_email": "creds-54@hall-pass-log.iam.gserviceaccount.com",
+  "client_id": "105800790630700816856",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/creds-54%40hall-pass-log.iam.gserviceaccount.com"
+}
