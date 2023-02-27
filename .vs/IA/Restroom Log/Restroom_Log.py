@@ -92,7 +92,7 @@ class SelectStudent(Tk):
         canvas.create_window((0,0), window = self.button_frame, anchor = 'nw')
 
         #import image for buttons and call make button method
-        self.icon = PhotoImage(file = r"C:\Users\jlars\Documents\VS Code Projects\PublicEnemy1\.vs\IA\Restroom Log\GUI button.png")
+        self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUI button.png")
         self.makeButtons()
 
     def makeButtons(self):

@@ -5,7 +5,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 gc = gspread.service_account(
-    filename= r"C:\Users\jlars\Documents\VS Code Projects\PublicEnemy1\.vs\IA\Restroom Log\hall-pass-creds.json" )  
+    filename= r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/hall-pass-creds.json" )  
 gsheet = gc.open_by_key("1oMakpyyRqNZyMroZ-P6pcBn3dmfjeccDAPllFPeg9xc")
 
 t = localtime()
@@ -22,6 +22,7 @@ def MakeToday():
 #open new worksheet as wsheet, if it doesn't exist yet create new sheet
 #finally return wsheet so that it can be accessed in other methods
 def OpenToday():
+    wsheet = ""
     try:
         wsheet = gsheet.worksheet(today)
     except gspread.exceptions.WorksheetNotFound:
