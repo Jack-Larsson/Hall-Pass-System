@@ -72,15 +72,15 @@ class SelectStudent(Tk):
         frame.grid_columnconfigure(0, weight=1)
 
         #creating a canvas that can be scrolled through
-        canvas=Canvas(frame,bg='Black',scrollregion=(0,0,780,628))
-        canvas.config(width=780,height=480)
+        canvas=Canvas(frame,bg='Black',scrollregion=(0,0,770,628))
+        canvas.config(width=770,height=480)
         canvas.grid(row=0, column=0, sticky = 'news')
 
         #create vertical scroll bar
         vbar=Scrollbar(frame, orient=VERTICAL)
         vbar.grid(row=0, column=1, sticky = 'nes')
         vbar.config(command=canvas.yview,
-            width = 20,
+            width = 30,
             bg = 'White',
             bd = 0,
             troughcolor = 'Black'
@@ -92,7 +92,7 @@ class SelectStudent(Tk):
         canvas.create_window((0,0), window = self.button_frame, anchor = 'nw')
 
         #import image for buttons and call make button method
-        self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUI button.png")
+        self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUIButtonV2.png")
         self.attributes('-fullscreen', True)
         self.makeButtons()
 
@@ -108,7 +108,7 @@ class SelectStudent(Tk):
         #Create grid of buttons that display and return a specific student before opening new window
         for j in range(len(self.students)):
             buttons.append(Button(self.button_frame ,text = self.students[j], image = self.icon, compound = CENTER,
-            bg = 'Black',activebackground = 'Black', width = 130, fg= "White", font=('Microsoft YaHei UI bold',12),bd = 0, highlightthickness= 0,  
+            bg = 'Black',activebackground = 'Black', width= 105, height= 90, fg= "White", font=('Microsoft YaHei UI bold',12),bd = 0, highlightthickness= 0,  
             command = lambda j=j: self.OpenNewWindow(self.students[j])
             ).grid(row = r, column = c, padx = 0, pady = 5))
             
