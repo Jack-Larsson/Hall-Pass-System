@@ -1,4 +1,3 @@
-from time import *
 from datetime import date
 from schedule import *
 import gspread
@@ -8,11 +7,9 @@ gc = gspread.service_account(
     filename= r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/hall-pass-creds.json" )  
 gsheet = gc.open_by_key("1oMakpyyRqNZyMroZ-P6pcBn3dmfjeccDAPllFPeg9xc")
 
-t = localtime()
 todaysdate = date.today()
 today = todaysdate.strftime('%m/%d/%Y')
 print(today)
-current_time = strftime("%H:%M:%S", t)
 
 #create worksheet with todays date as the title
 def MakeToday():
@@ -38,5 +35,5 @@ OpenToday()
 
 
 #write student name, the time they left, and the time they returned to spreadsheet
-def printstudent(last, first):
-    OpenToday().append_row([last, first, current_time])
+def printstudent(last, first, timein, timeout):
+    OpenToday().append_row([last, first, timein, timeout])
