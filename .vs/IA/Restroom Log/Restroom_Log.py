@@ -25,11 +25,8 @@ class Welcome(Tk):
         Welcome.grid_rowconfigure(1, weight=1)
 
         self.bind('<Escape>',lambda e: self.destroy())
-        thread = threading.Thread(target =SC.scanner(self.on_tag_read))
-        thread.start()
-        
-
-    def on_tag_read(self):
+       
+    def OpenSelectStudent():
         SelectStudent(self)
         
     
@@ -216,6 +213,8 @@ class StudentOut(Toplevel):
 
 
 if __name__ == "__main__":
+    thread = threading.Thread(target =SC.scanner, args=())
+    thread.start()
     window = Welcome()
     window.mainloop()
     
