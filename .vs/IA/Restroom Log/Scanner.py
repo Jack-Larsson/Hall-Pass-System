@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import RecordData as RD
-import Restroom_Log as RL
+from Restroom_Log import Welcome
 
 GPIO.setwarnings(False)
 reader = SimpleMFRC522()
@@ -9,6 +9,7 @@ reader = SimpleMFRC522()
 #get info from class period and open SelectStudent window                       
 def OpenClass(period):
         #get that class period for use
+        Welcome.OpenSelectStudent()
         check = period+1
         print(check)
 
@@ -32,17 +33,16 @@ def checkinout(string):
                 reader.write("returned")
                 RD.combine()
 
-def scanner(callback):
-        while True:
-        #try:
+def scanner():
+        try:
                 text = reader.read()
                 checkinout(text)
                 print(text)
-                callback()
+               
                 
 
-        #finally:
-         #       GPIO.cleanup()
+        finally:
+                GPIO.cleanup()
 
 
         
