@@ -1,4 +1,7 @@
 {
+  "[python]":{
+      "editor.showUnused": false,
+  },
   "ExpandedNodes": [
     ""
   ],

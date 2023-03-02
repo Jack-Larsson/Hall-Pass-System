@@ -1,16 +1,18 @@
 
 from tkinter import *
 from time import *
-import Scanner as SC
+import threading
 import RecordData as RD
+import Scanner as SC
 
 #pi screen is 800x480 pixels
 class Welcome(Tk):
+
     def __init__(self):
 
         super().__init__()
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
@@ -22,9 +24,15 @@ class Welcome(Tk):
         Welcome.grid_columnconfigure(1, weight=1)
         Welcome.grid_rowconfigure(1, weight=1)
 
-
-
         self.bind('<Escape>',lambda e: self.destroy())
+        thread = threading.Thread(target =SC.scanner(self.on_tag_read))
+        thread.start()
+        
+
+    def on_tag_read(self):
+        SelectStudent(self)
+        
+    
 
 
 class SelectStudent(Toplevel):
@@ -208,6 +216,6 @@ class StudentOut(Toplevel):
 
 
 if __name__ == "__main__":
-    SC.scanner()
     window = Welcome()
     window.mainloop()
+    
