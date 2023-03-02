@@ -1,12 +1,33 @@
 
 from tkinter import *
 from time import *
-import SheetsScript as SS
-
+import Scanner as SC
+import RecordData as RD
 
 #pi screen is 800x480 pixels
-class SelectStudent(Tk):
+class Welcome(Tk):
+    def __init__(self):
 
+        super().__init__()
+        
+        #self.attributes('-fullscreen', True)
+
+        self.configure(bg='#363636')
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
+        #create centerd label to welcome hall pass user
+        Welcome= Label(self, fg= "White",bg='#363636', text = "Welcome!\nscan tag to begin", font=('Microsoft YaHei UI bold',60))
+        Welcome.grid(row= 0, column=0)
+        Welcome.grid_columnconfigure(1, weight=1)
+        Welcome.grid_rowconfigure(1, weight=1)
+
+
+
+        self.bind('<Escape>',lambda e: self.destroy())
+
+
+class SelectStudent(Toplevel):
 
     students =[
         "john cena",
@@ -62,9 +83,9 @@ class SelectStudent(Tk):
         ]
     
 
-    def __init__(self):
+    def __init__(self, parent):
         super().__init__()
-
+        self.parent =parent
         #creating a main frame for button window
         frame=Frame(self)
         frame.grid(row=0,column=0, sticky = 'nw')
@@ -123,7 +144,7 @@ class SelectStudent(Tk):
         #seperate student name into first and last and write them into the spreadsheet
         name = student.split("\n")
         print(name[1], name[0])
-        SS.printstudent(name[1], name[0])
+        RD.getStudent(name[1], name[0])
         print(name[0])
         Thanks(self, student)
         
@@ -187,5 +208,6 @@ class StudentOut(Toplevel):
 
 
 if __name__ == "__main__":
-    window = SelectStudent()
+    SC.scanner()
+    window = Welcome()
     window.mainloop()
