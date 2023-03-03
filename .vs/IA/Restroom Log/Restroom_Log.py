@@ -26,7 +26,8 @@ class Welcome(Tk):
 
         self.bind('<Escape>',lambda e: self.destroy())
        
-    def OpenSelectStudent():
+    def OpenSelectStudent(self):
+        self.withdraw()
         SelectStudent(self)
         
     
