@@ -59,7 +59,15 @@ class SelectStudent(Toplevel):
         "Yung Foo",
         "Franklin Wu",
         "Anand Mehta",
-        "Jack Larsson"
+        "Jack Larsson",
+        "Amelia German",
+        "Alexandra DavisDonaldson",
+        "John Thweat",
+        "Eva Yakubov",
+        "Carter Peeler",
+        "Gram Coffman",
+        "Brandon Sun",
+        "Kennedy Houston"
         ]
     
 
@@ -73,7 +81,7 @@ class SelectStudent(Toplevel):
         frame.grid_columnconfigure(0, weight=1)
 
         #creating a canvas that can be scrolled through
-        canvas=Canvas(frame,bg='Black',scrollregion=(0,0,770,628))
+        canvas=Canvas(frame,bg='Black',highlightcolor= 'Black',bd = 0,highlightthickness=0, scrollregion=(0,0,770,628))
         canvas.config(width=770,height=480)
         canvas.grid(row=0, column=0, sticky = 'news')
 
@@ -82,7 +90,7 @@ class SelectStudent(Toplevel):
         vbar.grid(row=0, column=1, sticky = 'nes')
         vbar.config(command=canvas.yview,
             width = 30,
-            bg = 'White',
+            bg = '#363636',
             bd = 0,
             troughcolor = 'Black'
             )
@@ -177,7 +185,7 @@ class StudentOut(Toplevel):
         IsOut = IsOut.replace("\n", " ")
 
         #create centerd label to display the student who checked out until they return
-        goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
+        goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out.\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
         goodbye.grid(row= 0, column=0)
         goodbye.grid_columnconfigure(1, weight=1)
         goodbye.grid_rowconfigure(1, weight=1)
