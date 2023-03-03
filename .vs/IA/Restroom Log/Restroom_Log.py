@@ -25,7 +25,9 @@ class Welcome(Tk):
         welcomelabel.grid_rowconfigure(1, weight=1)
 
         self.bind('<Escape>',lambda e: self.destroy())
-       
+        Startthread = threading.Thread(target =SC.scanner, args=())
+        Startthread.start()
+
     def OpenSelectStudent(self):
         self.withdraw()
         SelectStudent(self)
@@ -162,7 +164,7 @@ class Thanks(Toplevel):
 
         self.parent = parent
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         #create centered label once student has completed check in process
         self.configure(bg='#363636')
@@ -192,7 +194,7 @@ class StudentOut(Toplevel):
 
         self.parent = parent
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
@@ -207,15 +209,16 @@ class StudentOut(Toplevel):
         goodbye.grid(row= 0, column=0)
         goodbye.grid_columnconfigure(1, weight=1)
         goodbye.grid_rowconfigure(1, weight=1)
-
-
+        print("wating for scan")
 
         self.bind('<Escape>',lambda e: parent.destroy())
 
+        Endthread = threading.Thread(target =SC.scanner, args=())
+        Endthread.start()
 
-if __name__ == "__main__":
-    thread = threading.Thread(target =SC.scanner, args=())
-    thread.start()
-    window = Welcome()
-    window.mainloop()
+#if __name__ == "__main__":
+    #thread = threading.Thread(target =SC.scanner, args=())
+    #thread.start()
+    #window = Welcome()
+    #window.mainloop()
     

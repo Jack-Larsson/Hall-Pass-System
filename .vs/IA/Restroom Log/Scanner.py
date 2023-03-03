@@ -5,7 +5,7 @@ from Restroom_Log import Welcome
 
 GPIO.setwarnings(False)
 reader = SimpleMFRC522()
-RL = Welcome()
+
 
 #get info from class period and open SelectStudent window                       
 def OpenClass(period):
@@ -32,8 +32,9 @@ def checkinout(string):
                 replaced = tag_text.replace("returned", "out")
                 reader.write(replaced)
                 print("wrte to tag:"+ replaced)
-                GetPeriod(tag_text)
                 RD.TimeOut()
+                GetPeriod(tag_text)
+
         #if the student is returning call combine() method
         if "out" in tag_text:
                 replaced = tag_text.replace("out", "returned")
@@ -52,6 +53,7 @@ def scanner():
         finally:
                 GPIO.cleanup()
 
-
+RL = Welcome()
+RL.mainloop()
         
                 
