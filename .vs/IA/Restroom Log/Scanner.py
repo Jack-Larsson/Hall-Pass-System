@@ -23,21 +23,28 @@ def GetPeriod(string):
 
 
 def checkinout(string):
+        tag_text = string
+        print("checkin/out")
         #if the student is leaving record time and set tag to say they've left
-        if "returned" in string:
-                reader.write("out")
-                GetPeriod(string)
+        if "returned" in tag_text:
+                print("got returned")
+                replaced = tag_text.replace("returned", "out")
+                reader.write(replaced)
+                print("wrte to tag:"+ replaced)
+                GetPeriod(tag_text)
                 RD.TimeOut()
         #if the student is returning call combine() method
-        if "out" in string:
-                reader.write("returned")
+        if "out" in tag_text:
+                replaced = tag_text.replace("out", "returned")
+                reader.write(replaced)
                 RD.combine()
 
 def scanner():
         try:
-                text = reader.read()
+                id,text = reader.read()
                 checkinout(text)
                 print(text)
+                print(id)
                
                 
 
