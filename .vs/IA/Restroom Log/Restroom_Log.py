@@ -215,7 +215,20 @@ class StudentOut(Toplevel):
 
         Endthread = threading.Thread(target =SC.scanner, args=())
         Endthread.start()
+        #self.Restart()
 
+
+    def Restart(self):
+        #while True:
+            if SC.Restart():
+                print("restarting")
+                self.withdraw()
+                window = Welcome()
+                window.mainloop()
+            else:
+                print("failed")
+                sleep(0.1)
+    
 #if __name__ == "__main__":
     #thread = threading.Thread(target =SC.scanner, args=())
     #thread.start()

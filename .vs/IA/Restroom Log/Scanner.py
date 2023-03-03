@@ -5,12 +5,16 @@ from Restroom_Log import Welcome
 
 GPIO.setwarnings(False)
 reader = SimpleMFRC522()
+restart = False 
 
 
 #get info from class period and open SelectStudent window                       
 def OpenClass(period):
         #get that class period for use
+        #try:
         RL.OpenSelectStudent()
+        #except RuntimeError:
+         #       restartRL.OpenSelectStudent()
         check = period+1
         print(check)
 
@@ -25,9 +29,12 @@ def GetPeriod(string):
 
 def checkinout(string):
         tag_text = string
+        global restart
+        global restartRL
         print("checkin/out")
         #if the student is leaving record time and set tag to say they've left
         if "returned" in tag_text:
+                restart = False
                 print("got returned")
                 replaced = tag_text.replace("returned", "out")
                 reader.write(replaced)
@@ -37,10 +44,22 @@ def checkinout(string):
 
         #if the student is returning call combine() method
         if "out" in tag_text:
+                restart = True
                 replaced = tag_text.replace("out", "returned")
                 reader.write(replaced)
+                print(restart)
+                print("replaced text with "+ replaced)
                 RD.combine()
-
+                #RL.quit()
+                #restartRL= Welcome()
+                RL = Welcome()
+                RL.mainloop()
+                
+               
+ 
+def Restart():
+        return restart               
+ 
 def scanner():
         try:
                 id,text = reader.read()
@@ -48,12 +67,10 @@ def scanner():
                 print(text)
                 print(id)
                
-                
-
         finally:
                 GPIO.cleanup()
 
-RL = Welcome()
+RL = Welcome() 
 RL.mainloop()
-        
+
                 
