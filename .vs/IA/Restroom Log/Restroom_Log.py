@@ -19,10 +19,10 @@ class Welcome(Tk):
         self.grid_rowconfigure(0, weight=1)
 
         #create centerd label to welcome hall pass user
-        Welcome= Label(self, fg= "White",bg='#363636', text = "Welcome!\nscan tag to begin", font=('Microsoft YaHei UI bold',60))
-        Welcome.grid(row= 0, column=0)
-        Welcome.grid_columnconfigure(1, weight=1)
-        Welcome.grid_rowconfigure(1, weight=1)
+        welcomelabel = Label(self, fg= "White",bg='#363636', text = "Welcome!\nscan tag to begin", font=('Microsoft YaHei UI bold',60))
+        welcomelabel.grid(row= 0, column=0)
+        welcomelabel.grid_columnconfigure(1, weight=1)
+        welcomelabel.grid_rowconfigure(1, weight=1)
 
         self.bind('<Escape>',lambda e: self.destroy())
        

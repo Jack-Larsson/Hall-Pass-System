@@ -5,11 +5,12 @@ from Restroom_Log import Welcome
 
 GPIO.setwarnings(False)
 reader = SimpleMFRC522()
+RL = Welcome()
 
 #get info from class period and open SelectStudent window                       
 def OpenClass(period):
         #get that class period for use
-        Welcome.OpenSelectStudent()
+        RL.OpenSelectStudent()
         check = period+1
         print(check)
 
