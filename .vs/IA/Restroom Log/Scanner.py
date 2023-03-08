@@ -2,6 +2,8 @@ import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import RecordData as RD
 from Restroom_Log import Welcome
+from Restroom_Log import StudentOut
+import threading
 
 GPIO.setwarnings(False)
 reader = SimpleMFRC522()
@@ -41,6 +43,7 @@ def checkinout(string):
                 print("wrte to tag:"+ replaced)
                 RD.TimeOut()
                 GetPeriod(tag_text)
+                Startthread.join()
 
         #if the student is returning call combine() method
         if "out" in tag_text:
@@ -50,27 +53,33 @@ def checkinout(string):
                 print(restart)
                 print("replaced text with "+ replaced)
                 RD.combine()
+                #SO.withdraw()
+                RL.deiconify()
+                Startthread = threading.Thread(target = scanner, args=())
+                Startthread.start()
                 #RL.quit()
                 #restartRL= Welcome()
-                RL = Welcome()
-                RL.mainloop()
+                #RL = Welcome()
+                #RL.mainloop()
+        #return restart
                 
-               
- 
-def Restart():
-        return restart               
+                          
  
 def scanner():
         try:
                 id,text = reader.read()
                 checkinout(text)
+                        #return True
                 print(text)
                 print(id)
+                #return False
                
         finally:
                 GPIO.cleanup()
+                #return False
 
 RL = Welcome() 
+#SO = StudentOut()
 RL.mainloop()
 
                 

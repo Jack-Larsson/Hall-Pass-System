@@ -2,6 +2,7 @@
 from tkinter import *
 from time import *
 import threading
+import concurrent.futures
 import RecordData as RD
 import Scanner as SC
 
@@ -12,7 +13,7 @@ class Welcome(Tk):
 
         super().__init__()
         
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
 
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
@@ -24,9 +25,13 @@ class Welcome(Tk):
         welcomelabel.grid_columnconfigure(1, weight=1)
         welcomelabel.grid_rowconfigure(1, weight=1)
 
+        self.Startthread = threading.Thread(target =SC.scanner, args=())
+        self.Startthread.start()
+        #Startthread.join()
+
         self.bind('<Escape>',lambda e: self.destroy())
-        Startthread = threading.Thread(target =SC.scanner, args=())
-        Startthread.start()
+        
+        
 
     def OpenSelectStudent(self):
         self.withdraw()
@@ -102,7 +107,7 @@ class SelectStudent(Toplevel):
 
         #import image for buttons and call make button method
         self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUIButtonV2.png")
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
         self.makeButtons()
 
     def makeButtons(self):
@@ -144,7 +149,7 @@ class Thanks(Toplevel):
 
         self.parent = parent
         
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
 
         #create centered label once student has completed check in process
         self.configure(bg='#363636')
@@ -174,7 +179,7 @@ class StudentOut(Toplevel):
 
         self.parent = parent
         
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
 
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
@@ -191,27 +196,21 @@ class StudentOut(Toplevel):
         goodbye.grid_rowconfigure(1, weight=1)
         print("wating for scan")
 
-        self.bind('<Escape>',lambda e: parent.destroy())
-
         Endthread = threading.Thread(target =SC.scanner, args=())
         Endthread.start()
-        #self.Restart()
+        #Endthread.join()
+
+        self.bind('<Escape>',lambda e: parent.destroy())
 
 
     def Restart(self):
-        #while True:
-            if SC.Restart():
-                print("restarting")
-                self.withdraw()
-                window = Welcome()
-                window.mainloop()
-            else:
-                print("failed")
-                sleep(0.1)
+            print("restarting")
+            self.withdraw()
+            Welcome.deiconify()
+                #window = Welcome()
+                #window.mainloop()
     
 #if __name__ == "__main__":
-    #thread = threading.Thread(target =SC.scanner, args=())
-    #thread.start()
-    #window = Welcome()
+   # window = Welcome()
     #window.mainloop()
     
