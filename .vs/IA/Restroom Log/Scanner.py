@@ -8,6 +8,8 @@ import threading
 GPIO.setwarnings(False)
 reader = SimpleMFRC522()
 restart = False 
+#RL = Welcome() 
+#SO = StudentOut()
 
 
 #get info from class period and open SelectStudent window                       
@@ -55,10 +57,10 @@ def checkinout(string):
                 RD.combine()
                 
                 SO.withdraw()
-                SO.withdraw()
+                #SO.withdraw()
                 RL.deiconify()
-                Startthread = threading.Thread(target = scanner, args=())
-                Startthread.start()
+                #Startthread = threading.Thread(target = scanner, args=())
+                #Startthread.start()
                 #RL.quit()
                 #restartRL= Welcome()
                 #RL = Welcome()
@@ -66,13 +68,13 @@ def checkinout(string):
         #return restart
                 
                           
- 
+
 def scanner():
         try:
                 id,text = reader.read()
                 checkinout(text)
                         #return True
-                start_threads()
+                
                 print(text)
                 print(id)
                 #return False
@@ -81,8 +83,5 @@ def scanner():
                 GPIO.cleanup()
                 #return False
 
-RL = Welcome() 
-SO = StudentOut()
-RL.mainloop()
 
                 

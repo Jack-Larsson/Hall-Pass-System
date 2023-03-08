@@ -25,8 +25,8 @@ class Welcome(Tk):
         welcomelabel.grid_columnconfigure(1, weight=1)
         welcomelabel.grid_rowconfigure(1, weight=1)
 
-        self.Startthread = threading.Thread(target =SC.scanner, args=())
-        self.Startthread.start()
+        #self.Startthread = threading.Thread(target =SC.scanner, args=())
+        #self.Startthread.start()
         #Startthread.join()
 
         self.bind('<Escape>',lambda e: self.destroy())
@@ -199,8 +199,8 @@ class StudentOut(Toplevel):
         goodbye.grid_rowconfigure(1, weight=1)
         print("wating for scan")
 
-        Endthread = threading.Thread(target =SC.scanner, args=())
-        Endthread.start()
+        #Endthread = threading.Thread(target =SC.scanner, args=())
+        #Endthread.start()
        
         #Endthread.join()
 
