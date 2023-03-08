@@ -171,9 +171,10 @@ class Thanks(Toplevel):
         StudentOut(self, leaver)
 
 
+
 class StudentOut(Toplevel):
 
-    def __init__(self, parent, student_name):
+    def __init__(self, parent = None, student_name = None):
 
         super().__init__()
 
@@ -185,9 +186,11 @@ class StudentOut(Toplevel):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
+        if student_name is not None:
         #put student name back together in one word to be displayed
-        IsOut = student_name
-        IsOut = IsOut.replace("\n", " ")
+            IsOut = student_name.replace("\n", " ")
+        else:
+            IsOut = ""
 
         #create centerd label to display the student who checked out until they return
         goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out.\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
@@ -198,10 +201,13 @@ class StudentOut(Toplevel):
 
         Endthread = threading.Thread(target =SC.scanner, args=())
         Endthread.start()
+       
         #Endthread.join()
 
         self.bind('<Escape>',lambda e: parent.destroy())
 
+
+    
 
     def Restart(self):
             print("restarting")

@@ -43,7 +43,7 @@ def checkinout(string):
                 print("wrte to tag:"+ replaced)
                 RD.TimeOut()
                 GetPeriod(tag_text)
-                Startthread.join()
+                #Startthread.join()
 
         #if the student is returning call combine() method
         if "out" in tag_text:
@@ -53,7 +53,9 @@ def checkinout(string):
                 print(restart)
                 print("replaced text with "+ replaced)
                 RD.combine()
-                #SO.withdraw()
+                
+                SO.withdraw()
+                SO.withdraw()
                 RL.deiconify()
                 Startthread = threading.Thread(target = scanner, args=())
                 Startthread.start()
@@ -70,6 +72,7 @@ def scanner():
                 id,text = reader.read()
                 checkinout(text)
                         #return True
+                start_threads()
                 print(text)
                 print(id)
                 #return False
@@ -79,7 +82,7 @@ def scanner():
                 #return False
 
 RL = Welcome() 
-#SO = StudentOut()
+SO = StudentOut()
 RL.mainloop()
 
                 
