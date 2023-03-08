@@ -1,10 +1,13 @@
 
 from tkinter import *
 from time import *
+import datetime as dt
 import threading
 import concurrent.futures
 import RecordData as RD
 import Scanner as SC
+
+Restart = False
 
 #pi screen is 800x480 pixels
 class Welcome(Tk):
@@ -14,7 +17,7 @@ class Welcome(Tk):
         super().__init__()
         
         #self.attributes('-fullscreen', True)
-
+        print("restarted")
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -25,8 +28,8 @@ class Welcome(Tk):
         welcomelabel.grid_columnconfigure(1, weight=1)
         welcomelabel.grid_rowconfigure(1, weight=1)
 
-        #self.Startthread = threading.Thread(target =SC.scanner, args=())
-        #self.Startthread.start()
+        self.Startthread = threading.Thread(target =SC.scanner, args=())
+        self.Startthread.start()
         #Startthread.join()
 
         self.bind('<Escape>',lambda e: self.destroy())
@@ -168,13 +171,12 @@ class Thanks(Toplevel):
 
     def OpenNewWindow(self, leaver):
         self.withdraw()
-        StudentOut(self, leaver)
-
+        StudentOut(self, student_name = leaver)
 
 
 class StudentOut(Toplevel):
 
-    def __init__(self, parent = None, student_name = None):
+    def __init__(self, parent= None, student_name = None):
 
         super().__init__()
 
@@ -186,35 +188,43 @@ class StudentOut(Toplevel):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        if student_name is not None:
         #put student name back together in one word to be displayed
+        if student_name is not None:
             IsOut = student_name.replace("\n", " ")
+
+            #create centerd label to display the student who checked out until they return
+            goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out.\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
+            goodbye.grid(row= 0, column=0)
+            goodbye.grid_columnconfigure(1, weight=1)
+            goodbye.grid_rowconfigure(1, weight=1)
+            print("wating for scan")
+
+            self.Endthread = threading.Thread(target =SC.scanner, args=())
+            #self.CheckRestart = threading.Thread(target =self.Restart, args=())
+            self.Endthread.start()
+            #self.Endthread.join()
+            #self.CheckRestart.start()
+            #self.CheckRestart.join()
+
+            self.bind('<Escape>',lambda e: parent.destroy())
+            self.Restart()
         else:
             IsOut = ""
-
-        #create centerd label to display the student who checked out until they return
-        goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out.\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
-        goodbye.grid(row= 0, column=0)
-        goodbye.grid_columnconfigure(1, weight=1)
-        goodbye.grid_rowconfigure(1, weight=1)
-        print("wating for scan")
-
-        #Endthread = threading.Thread(target =SC.scanner, args=())
-        #Endthread.start()
-       
-        #Endthread.join()
-
-        self.bind('<Escape>',lambda e: parent.destroy())
-
-
-    
+        
 
     def Restart(self):
-            print("restarting")
-            self.withdraw()
-            Welcome.deiconify()
-                #window = Welcome()
-                #window.mainloop()
+            global Restart
+            if Restart:
+                print("restarting")
+                print(Restart)
+                self.withdraw()
+                self.parent.parent.parent.deiconify()
+                self.parent.parent.parent.Startthread = threading.Thread(target =SC.scanner, args=())
+                self.parent.parent.parent.Startthread.start()
+                Restart= False
+            else:
+                self.after(100,self.Restart)
+           
     
 #if __name__ == "__main__":
    # window = Welcome()
