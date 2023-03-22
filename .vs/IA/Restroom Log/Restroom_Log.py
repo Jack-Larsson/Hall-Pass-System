@@ -6,8 +6,10 @@ import threading
 import concurrent.futures
 import RecordData as RD
 import Scanner as SC
+import ImportData as DB
 
 Restart = False
+Period = 0
 
 #pi screen is 800x480 pixels
 class Welcome(Tk):
@@ -45,38 +47,8 @@ class Welcome(Tk):
 
 class SelectStudent(Toplevel):
 
-    students =[
-        "Bryan Scott",
-        "Dorian Hawkins",
-        "Rowan Marshall",
-        "Nathan Mardanov",
-        "Giovanni Victorio",
-        "Rohan Mahendru",
-        "Eric Zazovsky",
-        "George Weng",
-        "Arthur Tran",
-        "Syrus Tolentino",
-        "Ricardo Perez",
-        "Avin Olvera",
-        "Diya Vettical",
-        "Dwayne Lopez",
-        "Zaara Bilal",
-        "Allison Cully",
-        "Andres Perez",
-        "Jude Joubert",
-        "Yung Foo",
-        "Franklin Wu",
-        "Anand Mehta",
-        "Jack Larsson",
-        "Amelia German",
-        "Alexandra DavisDonaldson",
-        "John Thweat",
-        "Eva Yakubov",
-        "Carter Peeler",
-        "Gram Coffman",
-        "Brandon Sun",
-        "Kennedy Houston"
-        ]
+    students = []
+
     
 
     def __init__(self, parent):
@@ -111,6 +83,8 @@ class SelectStudent(Toplevel):
         #import image for buttons and call make button method
         self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUIButtonV2.png")
         #self.attributes('-fullscreen', True)
+        global students
+        students = DB.pullClass(Period)
         self.makeButtons()
 
     def makeButtons(self):
