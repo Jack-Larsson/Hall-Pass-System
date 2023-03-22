@@ -18,7 +18,7 @@ class Welcome(Tk):
 
         super().__init__()
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
         print("restarted")
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
@@ -54,6 +54,7 @@ class SelectStudent(Toplevel):
     def __init__(self, parent):
         super().__init__()
         self.parent =parent
+        self.students = DB.pullClass(Period)
         #creating a main frame for button window
         frame=Frame(self)
         frame.grid(row=0,column=0, sticky = 'nw')
@@ -61,7 +62,7 @@ class SelectStudent(Toplevel):
         frame.grid_columnconfigure(0, weight=1)
 
         #creating a canvas that can be scrolled through
-        canvas=Canvas(frame,bg='Black',highlightcolor= 'Black',bd = 0,highlightthickness=0, scrollregion=(0,0,770,628))
+        canvas=Canvas(frame,bg='Black',highlightcolor= 'Black',bd = 0,highlightthickness=0, scrollregion=(0,0,770,(len(self.students)/6)*100))
         canvas.config(width=770,height=480)
         canvas.grid(row=0, column=0, sticky = 'news')
 
@@ -82,9 +83,7 @@ class SelectStudent(Toplevel):
 
         #import image for buttons and call make button method
         self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUIButtonV2.png")
-        #self.attributes('-fullscreen', True)
-        global students
-        students = DB.pullClass(Period)
+        self.attributes('-fullscreen', True)
         self.makeButtons()
 
     def makeButtons(self):
@@ -126,7 +125,7 @@ class Thanks(Toplevel):
 
         self.parent = parent
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         #create centered label once student has completed check in process
         self.configure(bg='#363636')
@@ -156,7 +155,7 @@ class StudentOut(Toplevel):
 
         self.parent = parent
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)

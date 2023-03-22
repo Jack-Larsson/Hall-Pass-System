@@ -19,8 +19,8 @@ def pullClass(period):
         temp_string = string.split(", ")
         new_string = temp_string[1] + " " + temp_string[0]
         students.append(new_string)
+    print(students)
     return students
 #WHERE course LIKE '[1]%'
 
-print(pullClass(1))
 

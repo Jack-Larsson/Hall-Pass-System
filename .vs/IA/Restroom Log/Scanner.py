@@ -12,8 +12,8 @@ restart = False
 #get info from class period and open SelectStudent window                       
 def OpenClass(period):
         #get that class period for use
-        RL.OpenSelectStudent()
         GUI.Period = period
+        RL.OpenSelectStudent()
         check = period+1
         print(check)
 
