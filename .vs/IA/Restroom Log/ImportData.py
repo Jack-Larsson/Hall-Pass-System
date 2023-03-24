@@ -1,4 +1,5 @@
 import mysql.connector
+print("started")
 
 #create connection to DataBase
 db = mysql.connector.connect(
@@ -8,6 +9,7 @@ db = mysql.connector.connect(
     database = 'StudentList'
 )
 
+print("connected")
 #create cursor object to read through database row by row
 mycursor = db.cursor()
 
@@ -27,5 +29,4 @@ def pullClass(period):
         students.append(new_string)
     
     return students
-
 

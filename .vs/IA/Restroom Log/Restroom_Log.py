@@ -54,7 +54,7 @@ class SelectStudent(Toplevel):
         frame.grid_columnconfigure(0, weight=1)
 
         #creating a canvas that can be scrolled through
-        canvas=Canvas(frame,bg='Black',highlightcolor= 'Black',bd = 0,highlightthickness=0, scrollregion=(0,0,770,(len(self.students)/6)*100))
+        canvas=Canvas(frame,bg='Black',highlightcolor= 'Black',bd = 0,highlightthickness=0, scrollregion=(0,0,770,(len(self.students)/6)*105))
         canvas.config(width=770,height=480)
         canvas.grid(row=0, column=0, sticky = 'news')
 
