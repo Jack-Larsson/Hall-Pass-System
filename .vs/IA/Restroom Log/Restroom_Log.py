@@ -1,9 +1,7 @@
 
 from tkinter import *
 from time import *
-import datetime as dt
 import threading
-import concurrent.futures
 import RecordData as RD
 import Scanner as SC
 import ImportData as DB
@@ -11,7 +9,6 @@ import ImportData as DB
 Restart = False
 Period = 0
 
-#pi screen is 800x480 pixels
 class Welcome(Tk):
 
     def __init__(self):
@@ -19,7 +16,6 @@ class Welcome(Tk):
         super().__init__()
         
         self.attributes('-fullscreen', True)
-        print("restarted")
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -32,7 +28,6 @@ class Welcome(Tk):
 
         self.Startthread = threading.Thread(target =SC.scanner, args=())
         self.Startthread.start()
-        #Startthread.join()
 
         self.bind('<Escape>',lambda e: self.destroy())
         
@@ -46,11 +41,8 @@ class Welcome(Tk):
 
 
 class SelectStudent(Toplevel):
-
     students = []
-
     
-
     def __init__(self, parent):
         super().__init__()
         self.parent =parent
@@ -112,9 +104,7 @@ class SelectStudent(Toplevel):
         self.withdraw()
         #seperate student name into first and last and write them into the spreadsheet
         name = student.split("\n")
-        print(name[1], name[0])
         RD.getStudent(name[1], name[0])
-        print(name[0])
         Thanks(self, student)
         
 
@@ -144,12 +134,12 @@ class Thanks(Toplevel):
 
     def OpenNewWindow(self, leaver):
         self.withdraw()
-        StudentOut(self, student_name = leaver)
+        StudentOut(self, leaver)
 
 
 class StudentOut(Toplevel):
 
-    def __init__(self, parent= None, student_name = None):
+    def __init__(self, parent, student_name ):
 
         super().__init__()
 
@@ -162,44 +152,36 @@ class StudentOut(Toplevel):
         self.grid_rowconfigure(0, weight=1)
 
         #put student name back together in one word to be displayed
-        if student_name is not None:
-            IsOut = student_name.replace("\n", " ")
+        S_Out = student_name.replace("\n", " ")
 
-            #create centerd label to display the student who checked out until they return
-            goodbye= Label(self, fg= "White",bg='#363636', text = IsOut + " \nis currently out.\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
-            goodbye.grid(row= 0, column=0)
-            goodbye.grid_columnconfigure(1, weight=1)
-            goodbye.grid_rowconfigure(1, weight=1)
-            print("wating for scan")
+        #create centerd label to display the student who checked out until they return
+        goodbye= Label(self, fg= "White",bg='#363636', text = S_Out + " \nis currently out.\nThank you for\nyour patience", font=('Microsoft YaHei UI bold',60))
+        goodbye.grid(row= 0, column=0)
+        goodbye.grid_columnconfigure(1, weight=1)
+        goodbye.grid_rowconfigure(1, weight=1)
 
-            self.Endthread = threading.Thread(target =SC.scanner, args=())
-            #self.CheckRestart = threading.Thread(target =self.Restart, args=())
-            self.Endthread.start()
-            #self.Endthread.join()
-            #self.CheckRestart.start()
-            #self.CheckRestart.join()
+        #create thread to check scanner for when the student returns
+        self.Endthread = threading.Thread(target =SC.scanner, args=())
+        self.Endthread.start()
 
-            self.bind('<Escape>',lambda e: parent.destroy())
-            self.Restart()
-        else:
-            IsOut = ""
+        self.bind('<Escape>',lambda e: parent.destroy())
+
+        self.Restart()
+
         
 
     def Restart(self):
             global Restart
             if Restart:
-                print("restarting")
-                print(Restart)
+                #when a tag is scanned withdraw current window and reopen Welcome screen
                 self.withdraw()
                 self.parent.parent.parent.deiconify()
+                #recreate thread in Welcome to check scanner
                 self.parent.parent.parent.Startthread = threading.Thread(target =SC.scanner, args=())
                 self.parent.parent.parent.Startthread.start()
                 Restart= False
             else:
+                #try again if the student hasn't returned
                 self.after(100,self.Restart)
            
-    
-#if __name__ == "__main__":
-   # window = Welcome()
-    #window.mainloop()
     

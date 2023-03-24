@@ -9,7 +9,7 @@ gsheet = gc.open_by_key("1oMakpyyRqNZyMroZ-P6pcBn3dmfjeccDAPllFPeg9xc")
 
 todaysdate = date.today()
 today = todaysdate.strftime('%m/%d/%Y')
-print(today)
+
 
 #create worksheet with todays date as the title
 def MakeToday():
