@@ -15,7 +15,7 @@ class Welcome(Tk):
 
         super().__init__()
         
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -54,7 +54,7 @@ class SelectStudent(Toplevel):
         frame.grid_columnconfigure(0, weight=1)
 
         #creating a canvas that can be scrolled through
-        canvas=Canvas(frame,bg='Black',highlightcolor= 'Black',bd = 0,highlightthickness=0, scrollregion=(0,0,770,(len(self.students)/6)*105))
+        canvas=Canvas(frame,bg='Black',highlightcolor= 'Black',bd = 0,highlightthickness=0, scrollregion=(0,0,770,((len(self.students)/6)+1)*110))
         canvas.config(width=770,height=480)
         canvas.grid(row=0, column=0, sticky = 'news')
 
@@ -75,7 +75,7 @@ class SelectStudent(Toplevel):
 
         #import image for buttons and call make button method
         self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUIButtonV2.png")
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
         self.makeButtons()
 
     def makeButtons(self):
@@ -115,7 +115,7 @@ class Thanks(Toplevel):
 
         self.parent = parent
         
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
 
         #create centered label once student has completed check in process
         self.configure(bg='#363636')
@@ -145,7 +145,7 @@ class StudentOut(Toplevel):
 
         self.parent = parent
         
-        self.attributes('-fullscreen', True)
+        #self.attributes('-fullscreen', True)
 
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
