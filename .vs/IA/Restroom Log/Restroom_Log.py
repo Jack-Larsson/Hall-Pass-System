@@ -1,6 +1,7 @@
 
 from tkinter import *
 from time import *
+import os
 import threading
 import RecordData as RD
 import Scanner as SC
@@ -15,7 +16,7 @@ class Welcome(Tk):
 
         super().__init__()
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -74,8 +75,9 @@ class SelectStudent(Toplevel):
         canvas.create_window((0,0), window = self.button_frame, anchor = 'nw')
 
         #import image for buttons and call make button method
-        self.icon = PhotoImage(file = r"/home/hanskonstantin/PublicEnemy1/.vs/IA/Restroom Log/GUIButtonV2.png")
-        #self.attributes('-fullscreen', True)
+        self.current_dir = os.getcwd()
+        self.icon = PhotoImage(file = f'{self.current_dir}/GUIButtonV2.png')
+        self.attributes('-fullscreen', True)
         self.makeButtons()
 
     def makeButtons(self):
@@ -115,7 +117,7 @@ class Thanks(Toplevel):
 
         self.parent = parent
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         #create centered label once student has completed check in process
         self.configure(bg='#363636')
@@ -145,7 +147,7 @@ class StudentOut(Toplevel):
 
         self.parent = parent
         
-        #self.attributes('-fullscreen', True)
+        self.attributes('-fullscreen', True)
 
         self.configure(bg='#363636')
         self.grid_columnconfigure(0, weight=1)
